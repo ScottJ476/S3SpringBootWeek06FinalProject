@@ -1,16 +1,20 @@
 package com.promineotech.guitar.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import com.promineotech.guitar.controller.support.FetchGuitarTestSupport;
 import com.promineotech.guitar.entity.Guitar;
-import com.promineotech.jeep.entity.Jeep;
+
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -27,12 +31,13 @@ class FetchGuitarTest extends FetchGuitarTestSupport{
     // Given: A valid model and URI
     String model = "912CE_TAYLOR";
     String uri = String.format("%s?model=%s",  getBaseUri(), model);
-    System.out.println(uri);
     
     // When:  a connection is made to the URI
-    ResponseEntity<Guitar> response = getRestTemplate().getForEntity(uri, Guitar.class);
+    ResponseEntity<List<Guitar>> response = getRestTemplate().exchange(uri,
+        HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
     
-    // Then: 
+    // Then: a list of guitars is returned
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 
 }
