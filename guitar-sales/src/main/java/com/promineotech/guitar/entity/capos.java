@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Pick {
-  private Long pickPK;
-  private String pickId;
-  private String manufacturer;
+public class capos {
+  private Long capoPK;
+  private String manufactuer;
   private String model;
   private BigDecimal price;
+  
 
 }

@@ -6,13 +6,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Strap {
-  private Long strapPK;
-  private String strapId;
+public class picks {
+  private Long pickPK;
   private String manufacturer;
   private String model;
-  private String material;
-  private String color;
   private BigDecimal price;
-  
+
 }

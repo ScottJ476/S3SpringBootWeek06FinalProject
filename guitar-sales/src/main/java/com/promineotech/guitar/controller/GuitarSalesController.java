@@ -18,44 +18,44 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @RequestMapping("/guitars")
 @OpenAPIDefinition(info = @Info(title = "Guitar Sales Service"), servers = {
-    @Server(url = "http://localhost:8080", description = "Local server.")})
+    @Server(url = "http://localhost:8080", description = "Local Server.")})
 public interface GuitarSalesController {
-  // @formatter: off
+  // @formatter:off
   @Operation(
-    summary = "Returns a list of Guitars", 
-    description = "Returns a list of Guitars given an optional model",
-    responses = {
-        @ApiResponse(
-            responseCode = "200", 
-            description = "A list of Guitars is returned", 
-            content = @Content(
-                mediaType = "application/json", 
-                schema = @Schema(implementation = Guitar.class))),  
-        @ApiResponse(
-            responseCode = "400", 
-            description = "The request parameters are invalid", 
-            content = @Content(mediaType = "application/json")), 
-        @ApiResponse(
-            responseCode = "404", 
-            description = "No Guitars were found with the input criteria", 
-            content = @Content(mediaType = "application/json")),  
-        @ApiResponse(
-            responseCode = "500", 
-            description = "An unplanned error occured", 
-            content = @Content(mediaType = "application/json")),
-    },
-    parameters = {
-        @Parameter(
-            name = "model", 
-            allowEmptyValue = false, 
-            required = false, 
-            description = "The model name (i.e., '912CE_TAYLOR)"), 
-    } 
+      summary = "Returns a list of Guitars",
+      description = "Returns a list of given an optional model",
+      responses = {
+          @ApiResponse(
+              responseCode = "200",
+              description = "A list of guitars is returned",
+              content = @Content(
+                  mediaType = "application/json", 
+                  schema = @Schema(implementation = Guitar.class))),
+          @ApiResponse(
+              responseCode = "400",
+              description = "The request parameters are invalid",
+              content = @Content(mediaType = "application/json")),
+          @ApiResponse(
+              responseCode = "404",
+              description = "No Guitars were found with the input criteria", 
+              content = @Content(mediaType = "application/json")),
+          @ApiResponse(
+              responseCode = "500",
+              description = "An unplanned error occured",
+              content = @Content(mediaType = "application/json"))
+      },
+      parameters = {
+          @Parameter(
+              name = "model",
+              allowEmptyValue = false, 
+              required = false, 
+              description = "The model name(i.e., '912CE_TAYLOR')")
+      }
   )
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
   List<Guitar> fetchGuitars(
-      @RequestParam(required = false) 
+      @RequestParam(required = false)
           String model);
-//@formatter: on
+//@formatter:on
 }

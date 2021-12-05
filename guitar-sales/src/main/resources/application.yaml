@@ -1,0 +1,9 @@
+spring:
+  datasource:    password: guitar
+    username: guitar
+    url: jdbc:mysql://localhost:3306/guitar
+
+logging:
+  level:
+    root: warn
+    '[com.promineotech]': debug

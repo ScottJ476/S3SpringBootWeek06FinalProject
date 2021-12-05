@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Capo {
-  private Long capoPK;
-  private String capoId;
+public class stands {
+  private Long standPK;
   private String manufacturer;
   private String model;
   private BigDecimal price;
+
 }

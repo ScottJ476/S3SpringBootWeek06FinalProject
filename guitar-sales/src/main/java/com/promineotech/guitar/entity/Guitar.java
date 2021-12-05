@@ -10,16 +10,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Guitar {
+
   private Long modelPK;
   private String modelId;
-  private String manufacturer;
+  private String color;
   private String model;
+  private String manufacturer;
   private StringType stringType;
   private int numStrings;
   private String bodyShape;
   private String topWood;
-  private String backSidesWood;
+  private String otherWood;
   private BigDecimal price;
+  
+  
 }
