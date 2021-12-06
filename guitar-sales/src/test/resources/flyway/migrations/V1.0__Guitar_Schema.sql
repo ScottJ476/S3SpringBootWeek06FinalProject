@@ -29,7 +29,7 @@ CREATE TABLE models (
   back_sides_wood varchar(60) NOT NULL,
   price decimal(9, 2) NOT NULL,
   PRIMARY KEY (model_pk),
-  UNIQUE KEY (model_id, string_type, num_strings, body_shape)
+  UNIQUE KEY (model_id)
 );
 
 CREATE TABLE images (

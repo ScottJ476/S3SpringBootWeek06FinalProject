@@ -19,7 +19,7 @@ public class FetchGuitarTestSupport extends BaseTest {
         .numStrings(6)
         .bodyShape("Grand Concert")
         .topWood("Lutz Spruce")
-        .otherWood("Indian Rosewood")
+        .backSidesWood("Indian Rosewood")
         .price(new BigDecimal("5499.00"))
         .build());
     
@@ -31,7 +31,7 @@ public class FetchGuitarTestSupport extends BaseTest {
         .numStrings(12)
         .bodyShape("Grand Auditorium")
         .topWood("Sitka Spruce")
-        .otherWood("Rosewood")
+        .backSidesWood("Rosewood")
         .price(new BigDecimal("1099.00"))
         .build());
     // @formatter:on
