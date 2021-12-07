@@ -9,17 +9,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class BasicGuitarSalesService implements GuitarSalesService {
+public class DefaultGuitarSalesService implements GuitarSalesService {
   
   @Autowired
   private GuitarSalesDao guitarSalesDao;
 
   @Override
-  public List<Guitar> fetchGuitars(String model) {
-log.info("The fetchGuitars method was called with model={}",
-    model);
+  public Guitar fetchGuitar(String guitarId) {
+    log.info("The fetchGuitar method was called with guitarId={}", guitarId);
 
-    return guitarSalesDao.fetchGuitars(model);
+    return guitarSalesDao.fetchGuitar(guitarId);
   }
 
 }

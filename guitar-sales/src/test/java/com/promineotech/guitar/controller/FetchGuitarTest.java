@@ -22,32 +22,32 @@ import com.promineotech.guitar.entity.Guitar;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-@Sql(
-    scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
+@Sql(scripts = {
+        "classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
         "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
     config = @SqlConfig(encoding = "utf-8"))
 class FetchGuitarTest extends FetchGuitarTestSupport {
  
   @Test
-  void testThatGuitarsAreReturnedWhenAValidModelIsSupplied() {
-    //System.out.println(getBaseUri());
-    // Given: A valid model and URI
-    String model = "912CE_TAYLOR";
-    String uri = String.format("%s?model=%s",  getBaseUri(), model);
-    System.out.println(uri);
+  void testThatGuitarIsReturnedWhenAValidGuitarIdIsSupplied() {
+    
+    // Given: A valid guitarId and URI
+    String guitarId = "912CE_TAYLOR";
+    String uri = String.format("%s?guitarId=%s",  getBaseUriForGuitars(), guitarId);
     
     // When:  a connection is made to the URI
-    ResponseEntity<List<Guitar>> response = 
+    ResponseEntity<Guitar> response = 
         getRestTemplate().exchange(uri, HttpMethod.GET, null, 
             new ParameterizedTypeReference<>() {});
     
     // Then: A success (200) status code is returned
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);  
     
-    // And: the actual list returned is the same as expected list
-    List<Guitar> expected = buildExpected();
-    System.out.println(expected);
-    assertThat(response.getBody()).isEqualTo(expected);
+    // And: the actual guitar returned is the same as expected guitar
+    Guitar expected = buildExpected();
+    Guitar actual = response.getBody();
+    
+    assertThat(actual).isEqualTo(expected);
     
   }
 

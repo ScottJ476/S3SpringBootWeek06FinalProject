@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS stands;
 DROP TABLE IF EXISTS capos;
 DROP TABLE IF EXISTS straps;
 DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS guitars;
 DROP TABLE IF EXISTS models;
 DROP TABLE IF EXISTS customers;
 
@@ -17,9 +18,9 @@ CREATE TABLE customers (
   PRIMARY KEY (customer_pk)
 );
 
-CREATE TABLE models (
-  model_pk int unsigned NOT NULL AUTO_INCREMENT,
-  model_id varchar(60) NOT NULL,
+CREATE TABLE guitars (
+  guitar_pk int unsigned NOT NULL AUTO_INCREMENT,
+  guitar_id varchar(60) NOT NULL,
   manufacturer varchar(60) NOT NULL,
   model varchar(60) NOT NULL,
   string_type enum ('STEEL', 'NYLON') NOT NULL,
@@ -28,13 +29,13 @@ CREATE TABLE models (
   top_wood varchar(60) NOT NULL,
   back_sides_wood varchar(60) NOT NULL,
   price decimal(9, 2) NOT NULL,
-  PRIMARY KEY (model_pk),
-  UNIQUE KEY (model_id)
+  PRIMARY KEY (guitar_pk),
+  UNIQUE KEY (guitar_id)
 );
 
 CREATE TABLE images (
   image_pk int unsigned NOT NULL AUTO_INCREMENT,
-  model_fk int unsigned NOT NULL,
+  guitar_fk int unsigned NOT NULL,
   image_id varchar(40) NOT NULL,
   width int NOT NULL,
   height int NOT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE images (
   name varchar(256),
   data mediumblob NOT NULL,
   PRIMARY KEY (image_pk),
-  FOREIGN KEY (model_fk) REFERENCES models (model_pk)
+  FOREIGN KEY (guitar_fk) REFERENCES guitars (guitar_pk)
 );
   
 CREATE TABLE straps (
@@ -94,7 +95,7 @@ CREATE TABLE orders (
   capo_fk int unsigned,
   stand_fk int unsigned,
   pick_fk int unsigned,
-  model_fk int unsigned NOT NULL,
+  guitar_fk int unsigned NOT NULL,
   price decimal(9, 2) NOT NULL,
   PRIMARY KEY (order_pk),
   FOREIGN KEY (customer_fk) REFERENCES customers (customer_pk) ON DELETE CASCADE,
@@ -102,5 +103,5 @@ CREATE TABLE orders (
   FOREIGN KEY (capo_fk) REFERENCES capos (capo_pk) ON DELETE CASCADE,
   FOREIGN KEY (stand_fk) REFERENCES stands (stand_pk) ON DELETE CASCADE,
   FOREIGN KEY (pick_fk) REFERENCES picks (pick_pk) ON DELETE CASCADE,
-  FOREIGN KEY (model_fk) REFERENCES models (model_pk) ON DELETE CASCADE
+  FOREIGN KEY (guitar_fk) REFERENCES guitars (guitar_pk) ON DELETE CASCADE
 );

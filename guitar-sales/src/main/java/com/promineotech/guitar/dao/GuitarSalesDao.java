@@ -1,6 +1,7 @@
 package com.promineotech.guitar.dao;
 
 import java.util.List;
+import java.util.Optional;
 import com.promineotech.guitar.entity.Guitar;
 
 public interface GuitarSalesDao {
@@ -10,6 +11,6 @@ public interface GuitarSalesDao {
    * @param model
    * @return
    */
-  List<Guitar> fetchGuitars(String model);
+  Guitar fetchGuitar(String guitarId);
 
 }

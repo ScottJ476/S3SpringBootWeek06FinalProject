@@ -10,26 +10,26 @@ INSERT INTO customers (customer_id, first_name, last_name, phone) VALUES('SMITH_
 -- MODELS =======================================================================================================
 
 -- Cordoba
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('RODRIQUEZ_CORDOBA', 'Cordoba', 'Rodriguez Master Series', 'NYLON', 6, 'Classical', 'Cedar', 'Indian Rosewood', 4399.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('RODRIQUEZ_CORDOBA', 'Cordoba', 'Rodriguez Master Series', 'NYLON', 6, 'Classical', 'Cedar', 'Indian Rosewood', 4399.00);
 
 -- Guild
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('P240_GUILD', 'Guild', 'P-240 Memoir', 'STEEL', 6, 'Parlor', 'Sitka Spruce', 'Mahogany', 529.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('P240_GUILD', 'Guild', 'P-240 Memoir', 'STEEL', 6, 'Parlor', 'Sitka Spruce', 'Mahogany', 529.00);
 
 -- Martin
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('HD28_MARTIN', 'Martin', 'HD-28', 'STEEL', 6, 'Dreadnought', 'Sitka Spruce', 'East Indian Rosewood', 3199.00);
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('0018_MARTIN', 'Martin', '00-18', 'STEEL', 6, 'Grand Concert', 'Sitka Spruce', 'Mahogany', 2499.00);
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('DX2E_MARTIN', 'Martin', 'D-X2E', 'STEEL', 12, 'Dreadnought', 'Sitka Spruce', 'High-pressure Laminate', 599.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('HD28_MARTIN', 'Martin', 'HD-28', 'STEEL', 6, 'Dreadnought', 'Sitka Spruce', 'East Indian Rosewood', 3199.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('0018_MARTIN', 'Martin', '00-18', 'STEEL', 6, 'Grand Concert', 'Sitka Spruce', 'Mahogany', 2499.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('DX2E_MARTIN', 'Martin', 'D-X2E', 'STEEL', 12, 'Dreadnought', 'Sitka Spruce', 'High-pressure Laminate', 599.00);
 
 -- Takamine
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('P3NY_TAKAMINE', 'Takamine', 'P3NY New Yorker', 'STEEL', 6, 'Parlor', 'Cedar', 'Sapele', 1449.99);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('P3NY_TAKAMINE', 'Takamine', 'P3NY New Yorker', 'STEEL', 6, 'Parlor', 'Cedar', 'Sapele', 1449.99);
 
 -- Taylor
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('912CE_TAYLOR', 'Taylor', '912ce Builders Edition', 'STEEL', 6, 'Grand Concert', 'Lutz Spruce', 'Indian Rosewood', 5499.00);
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('254CE_TAYLOR', 'Taylor', '254ce', 'STEEL', 12, 'Grand Auditorium', 'Sitka Spruce', 'Rosewood', 1099.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('912CE_TAYLOR', 'Taylor', '912ce Builders Edition', 'STEEL', 6, 'Grand Concert', 'Lutz Spruce', 'Indian Rosewood', 5499.00);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('254CE_TAYLOR', 'Taylor', '254ce', 'STEEL', 12, 'Grand Auditorium', 'Sitka Spruce', 'Rosewood', 1099.00);
 
 -- Yamaha
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('FG800_YAMAHA', 'Yamaha', 'FG800', 'STEEL', 6, 'Dreadnought', 'Solid Spruce', 'Nato/Okoume', 219.99);
-INSERT INTO models (model_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('C40II_YAMAHA', 'Yamaha', 'C40II Full-scale Classical', 'NYLON', 6, 'Classical', 'Spruce', 'Meranti', 159.99);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('FG800_YAMAHA', 'Yamaha', 'FG800', 'STEEL', 6, 'Dreadnought', 'Solid Spruce', 'Nato/Okoume', 219.99);
+INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('C40II_YAMAHA', 'Yamaha', 'C40II Full-scale Classical', 'NYLON', 6, 'Classical', 'Spruce', 'Meranti', 159.99);
 
 
 -- ACCESSORIES ===================================================================================================

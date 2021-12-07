@@ -22,12 +22,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
 public interface GuitarSalesController {
   // @formatter:off
   @Operation(
-      summary = "Returns a list of Guitars",
-      description = "Returns a list of given an optional model",
+      summary = "Returns a Guitar",
+      description = "Returns a guitar given a guitarId",
       responses = {
           @ApiResponse(
               responseCode = "200",
-              description = "A list of guitars is returned",
+              description = "A guitar is returned",
               content = @Content(
                   mediaType = "application/json", 
                   schema = @Schema(implementation = Guitar.class))),
@@ -46,16 +46,16 @@ public interface GuitarSalesController {
       },
       parameters = {
           @Parameter(
-              name = "model",
+              name = "guitarId",
               allowEmptyValue = false, 
               required = false, 
-              description = "The model name(i.e., '912CE_TAYLOR')")
+              description = "The guitarId name(i.e., '912CE_TAYLOR')")
       }
   )
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
-  List<Guitar> fetchGuitars(
+  Guitar fetchGuitar(
       @RequestParam(required = false)
-          String model);
+          String guitarId);
 //@formatter:on
 }

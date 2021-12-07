@@ -1,6 +1,7 @@
 spring:
   datasource:
     url: jdbc:h2:mem:guitar
+    
 logging:
   level:
     root: warn

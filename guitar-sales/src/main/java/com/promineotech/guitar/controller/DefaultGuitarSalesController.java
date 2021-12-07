@@ -9,15 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class BasicGuitarSalesController implements GuitarSalesController {
+public class DefaultGuitarSalesController implements GuitarSalesController {
   
   @Autowired
   private GuitarSalesService guitarSalesService;
 
   @Override
-  public List<Guitar> fetchGuitars(String model) {
-    log.debug("model={}", model);
-    return guitarSalesService.fetchGuitars(model);
+  public Guitar fetchGuitar(String guitarId) {
+    log.debug("guitarId={}", guitarId);
+    return guitarSalesService.fetchGuitar(guitarId);
   }
 
 }

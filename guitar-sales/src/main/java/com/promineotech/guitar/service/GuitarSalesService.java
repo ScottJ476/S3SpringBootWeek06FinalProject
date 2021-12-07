@@ -10,6 +10,6 @@ public interface GuitarSalesService {
    * @param model
    * @return
    */
-  List<Guitar> fetchGuitars(String model);
+  Guitar fetchGuitar(String guitarId);
 
 }

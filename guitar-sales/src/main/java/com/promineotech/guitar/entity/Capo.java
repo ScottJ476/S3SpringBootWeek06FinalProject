@@ -1,16 +1,21 @@
 package com.promineotech.guitar.entity;
 
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class capos {
+public class Capo {
   private Long capoPK;
-  private String manufactuer;
+  private String capoId;
+  private String manufacturer;
   private String model;
   private BigDecimal price;
   
-
+  @JsonIgnore
+  public Long getCapoPK() {
+    return capoPK;
+  }
 }
