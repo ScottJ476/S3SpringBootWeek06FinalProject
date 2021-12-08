@@ -11,6 +11,6 @@ public interface GuitarSalesDao {
    * @param model
    * @return
    */
-  Guitar fetchGuitar(String guitarId);
+  Optional<Guitar> fetchGuitar(String guitarId);
 
 }

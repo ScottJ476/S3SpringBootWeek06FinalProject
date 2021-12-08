@@ -1,7 +1,7 @@
 package com.promineotech.guitar.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,17 +18,16 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
 
   @Transactional(readOnly = true)
   @Override
-  public Guitar fetchGuitar(String guitarId) {
+  public Optional<Guitar> fetchGuitar(String guitarId) {
     log.info("The fetchGuitar method was called with guitarId={}", guitarId);
 
-    Guitar guitar = guitarSalesDao.fetchGuitar(guitarId);
+    Optional<Guitar> guitar = guitarSalesDao.fetchGuitar(guitarId);
   
-    if(guitar.equals(null)) {
+    if(guitar.isEmpty()) {
       String msg = String.format("No guitar found with guitarId=%s", guitarId);
       throw new NoSuchElementException(msg);
     }
     
-    System.out.println(guitar);
     return guitar;
   }
 

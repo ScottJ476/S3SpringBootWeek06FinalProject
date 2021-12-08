@@ -1,12 +1,16 @@
 package com.promineotech.guitar.controller.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import org.springframework.http.HttpStatus;
 import com.promineotech.guitar.entity.Guitar;
 import com.promineotech.guitar.entity.StringType;
 
 public class FetchGuitarTestSupport extends BaseTest {
+  
   protected Guitar buildExpected() {
  // @formatter:off
    return Guitar.builder()
@@ -23,4 +27,14 @@ public class FetchGuitarTestSupport extends BaseTest {
     // @formatter:on
   }
 
+  protected void assertErrorMessageValid(Map<String, Object> error, HttpStatus status) {
+    // formatter:off
+    assertThat(error)
+        .containsKey("message")
+        .containsEntry("status code", status.value())
+        .containsEntry("uri", "/guitars")
+        .containsKey("timestamp")
+        .containsEntry("reason", status.getReasonPhrase());  
+    // formatter:on
+  }
 }

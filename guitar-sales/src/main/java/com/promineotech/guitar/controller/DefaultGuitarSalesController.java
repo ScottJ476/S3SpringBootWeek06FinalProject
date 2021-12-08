@@ -1,6 +1,6 @@
 package com.promineotech.guitar.controller;
 
-import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.promineotech.guitar.entity.Guitar;
@@ -15,7 +15,7 @@ public class DefaultGuitarSalesController implements GuitarSalesController {
   private GuitarSalesService guitarSalesService;
 
   @Override
-  public Guitar fetchGuitar(String guitarId) {
+  public Optional<Guitar> fetchGuitar(String guitarId) {
     log.debug("guitarId={}", guitarId);
     return guitarSalesService.fetchGuitar(guitarId);
   }

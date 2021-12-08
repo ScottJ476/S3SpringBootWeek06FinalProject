@@ -1,6 +1,6 @@
 package com.promineotech.guitar.service;
 
-import java.util.List;
+import java.util.Optional;
 import com.promineotech.guitar.entity.Guitar;
 
 public interface GuitarSalesService {
@@ -10,6 +10,6 @@ public interface GuitarSalesService {
    * @param model
    * @return
    */
-  Guitar fetchGuitar(String guitarId);
+  Optional<Guitar> fetchGuitar(String guitarId);
 
 }

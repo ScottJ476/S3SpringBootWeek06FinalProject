@@ -1,11 +1,15 @@
 package com.promineotech.guitar.controller;
 
-import java.util.List;
+import java.util.Optional;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import com.promineotech.guitar.Constants;
 import com.promineotech.guitar.entity.Guitar;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
+@Validated
 @RequestMapping("/guitars")
 @OpenAPIDefinition(info = @Info(title = "Guitar Sales Service"), servers = {
     @Server(url = "http://localhost:8080", description = "Local Server.")})
@@ -54,8 +59,10 @@ public interface GuitarSalesController {
   )
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
-  Guitar fetchGuitar(
-      @RequestParam(required = false)
-          String guitarId);
+  Optional<Guitar> fetchGuitar(
+      @Length(max = Constants.GUITARID_MAX_LENGTH)
+      @Pattern(regexp = "[\\w\\s]*") 
+      @RequestParam(required = false)        
+          String guitarId);     
 //@formatter:on
 }

@@ -22,7 +22,7 @@ public class DefaultGuitarSalesDao implements GuitarSalesDao {
   private NamedParameterJdbcTemplate jdbcTemplate;
 
   @Override
-  public Guitar fetchGuitar(String guitarId) {
+  public Optional<Guitar> fetchGuitar(String guitarId) {
     log.debug("DAO: guitarId={}", guitarId);
     
     // @formatter:off
@@ -38,11 +38,10 @@ public class DefaultGuitarSalesDao implements GuitarSalesDao {
     return jdbcTemplate.query(sql, params, new ResultSetExtractor<>() {
       
       @Override
-      public Guitar extractData(ResultSet rs) throws SQLException {
-        rs.next();
-        
-          // @formatter:off
-          return Guitar.builder()
+      public Optional<Guitar> extractData(ResultSet rs) throws SQLException {
+        if (rs.next()) {
+       // @formatter:off
+          return Optional.of(Guitar.builder()
               .guitarPK(rs.getLong("guitar_pk"))
               .guitarId(rs.getString("guitar_id"))
               .manufacturer(rs.getString("manufacturer"))
@@ -53,8 +52,12 @@ public class DefaultGuitarSalesDao implements GuitarSalesDao {
               .topWood(rs.getString("top_wood"))
               .backSidesWood(rs.getString("back_sides_wood"))
               .price(rs.getBigDecimal("price"))
-              .build();
+              .build());
           // @formatter:on
-      }});
-    }
+         }
+        
+        return Optional.empty();
+        }});
+  }
 }
+    
