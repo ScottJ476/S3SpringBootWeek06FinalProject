@@ -36,9 +36,7 @@ class FetchGuitarTest extends FetchGuitarTestSupport {
     String uri = String.format("%s?guitarId=%s",  getBaseUriForGuitars(), guitarId);
     
     // When:  a connection is made to the URI
-    ResponseEntity<Guitar> response = 
-        getRestTemplate().exchange(uri, HttpMethod.GET, null, 
-            new ParameterizedTypeReference<>() {});
+    ResponseEntity<Guitar> response = getRestTemplate().getForEntity(uri, Guitar.class);
     
     // Then: A success (200) status code is returned
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);  
@@ -48,6 +46,24 @@ class FetchGuitarTest extends FetchGuitarTestSupport {
     Guitar actual = response.getBody();
     
     assertThat(actual).isEqualTo(expected);
+    
+  }
+ 
+  @Test
+  void testThatAnErrorMessageIsReturnedWhenAnUnknownGuitarIdIsSupplied() {
+    
+    // Given: A valid guitarId and URI
+    String guitarId = "Unknown_Value";
+    String uri = String.format("%s?guitarId=%s",  getBaseUriForGuitars(), guitarId);
+    
+    // When:  a connection is made to the URI
+    ResponseEntity<?> response = getRestTemplate().getForEntity(uri, Guitar.class);
+    
+    // Then: A success (200) status code is returned
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);  
+    
+    // And: the actual guitar returned is the same as expected guitar
+    
     
   }
 
