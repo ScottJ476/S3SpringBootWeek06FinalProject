@@ -27,7 +27,10 @@ public class DefaultGuitarSalesController implements GuitarSalesController {
   @Override
   public String uploadImage(MultipartFile image, Long guitarPK) {
 log.debug("image={}, guitarPK={}", image, guitarPK);
-    return null;
+    String imageId = guitarSalesService.uploadImage(image, guitarPK);
+    String json = "{\"imageId\":\"" + imageId + "\"}";
+    
+    return json;
   }
 
 }
