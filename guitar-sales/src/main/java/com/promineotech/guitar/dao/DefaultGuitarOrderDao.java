@@ -21,12 +21,157 @@ import com.promineotech.guitar.entity.Pick;
 import com.promineotech.guitar.entity.Stand;
 import com.promineotech.guitar.entity.Strap;
 import com.promineotech.guitar.entity.StringType;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 public class DefaultGuitarOrderDao implements GuitarOrderDao {
 
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
+
+  @Override
+  public Order saveOrder(Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand,
+      Pick pick, BigDecimal price) {
+
+    SqlParams params = generateInsertSql(customer, guitar, strap, capo, stand, pick, price);
+
+    KeyHolder keyHolder = new GeneratedKeyHolder();
+    jdbcTemplate.update(params.sql, params.source, keyHolder);
+
+    Long orderPK = keyHolder.getKey().longValue();
+
+    // @formatter:off
+    return Order.builder()
+        .orderPK(orderPK)
+        .customer(customer)
+        .guitar(guitar)
+        .strap(strap)
+        .capo(capo)
+        .stand(stand)
+        .pick(pick)
+        .price(price)
+        .build();
+    // @formatter:on
+  }
+
+  // @Override
+  // public Order updateOrder(Order order, Customer customer, Guitar guitar, Strap strap, Capo capo,
+  // Stand stand,
+  // Pick pick, BigDecimal price) {
+  //
+  // SqlParams params = generateUpdateSql(order, customer, guitar, strap, capo, stand, pick, price);
+  //
+  // KeyHolder keyHolder = new GeneratedKeyHolder();
+  // jdbcTemplate.update(params.sql, params.source, keyHolder);
+  //
+  // Long orderPK = keyHolder.getKey().longValue();
+  //
+//    // @formatter:off
+//    return null;
+//    // @formatter:on
+  // }
+
+  @Override
+  public void updateOrder(Order order, Customer customer, Guitar guitar, Strap strap, Capo capo,
+      Stand stand, Pick pick, BigDecimal price) {
+
+    // @formatter:off
+    String sql = ""
+        + "UPDATE orders SET "      
+        + "customer_fk = :customer_fk, "
+        + "strap_fk = :strap_fk, "
+        + "capo_fk = :capo_fk, "
+        + "stand_fk = :stand_fk, "
+        + "pick_fk = :pick_fk, "
+        + "guitar_fk = :guitar_fk, "
+        + "price = :price "
+        + "WHERE order_pk = :order_pk";
+    // @formatter:on
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("order_pk", order.getOrderPK());
+    params.put("customer_fk", customer.getCustomerPK());
+    params.put("strap_fk", strap.getStrapPK());
+    params.put("capo_fk", capo.getCapoPK());
+    params.put("stand_fk", stand.getStandPK());
+    params.put("pick_fk", pick.getPickPK());
+    params.put("guitar_fk", guitar.getGuitarPK());
+    params.put("price", price);
+
+    jdbcTemplate.update(sql, params);
+  }
+
+  private SqlParams generateInsertSql(Customer customer, Guitar guitar, Strap strap, Capo capo,
+      Stand stand, Pick pick, BigDecimal price) {
+    // @formatter:off
+    String sql = ""
+        + "INSERT INTO orders ("
+        + "customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price"
+        + ") VALUES ("
+        + ":customer_fk, :strap_fk, :capo_fk, :stand_fk, :pick_fk, :guitar_fk, :price"
+        + ")";
+    // @formatter:on
+
+    SqlParams params = new SqlParams();
+
+    params.sql = sql;
+    params.source.addValue("customer_fk", customer.getCustomerPK());
+    params.source.addValue("strap_fk", strap.getStrapPK());
+    params.source.addValue("capo_fk", capo.getCapoPK());
+    params.source.addValue("stand_fk", stand.getStandPK());
+    params.source.addValue("pick_fk", pick.getPickPK());
+    params.source.addValue("guitar_fk", guitar.getGuitarPK());
+    params.source.addValue("price", price);
+
+    return params;
+  }
+
+  // private SqlParams generateUpdateSql(Order order, Customer customer, Guitar guitar, Strap strap,
+  // Capo capo,
+  // Stand stand, Pick pick, BigDecimal price) {
+//    // @formatter:off
+//    String sql = ""
+//        + "UPDATE orders SET "      
+//        + "customer_fk = :customer_fk, "
+//        + "strap_fk = :strap_fk, "
+//        + "capo_fk = :capo_fk, "
+//        + "stand_fk = :stand_fk, "
+//        + "pick_fk = :pick_fk, "
+//        + "guitar_fk = :guitar_fk, "
+//        + "price = :price "
+//        + "WHERE order_pk = :order_pk";
+//    // @formatter:on
+  //
+  // SqlParams params = new SqlParams();
+  //
+  // params.sql = sql;
+  // params.source.addValue("order_pk", order.getOrderPK());
+  // params.source.addValue("customer_fk", customer.getCustomerPK());
+  // params.source.addValue("strap_fk", strap.getStrapPK());
+  // params.source.addValue("capo_fk", capo.getCapoPK());
+  // params.source.addValue("stand_fk", stand.getStandPK());
+  // params.source.addValue("pick_fk", pick.getPickPK());
+  // params.source.addValue("guitar_fk", guitar.getGuitarPK());
+  // params.source.addValue("price", price);
+  //
+  //
+  // return params;
+  // }
+
+  @Override
+  public Optional<Order> fetchOrder(Long orderPK) {
+ // @formatter:off
+    String sql = "" 
+        + "SELECT * " 
+        + "FROM customers "
+        + "WHERE order_pk = :order_pk";
+    // @formatter:on
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("order_pk", orderPK);
+
+    return Optional.ofNullable(jdbcTemplate.query(sql, params, new OrderResultSetExtractor()));
+  }
 
   @Override
   public Optional<Customer> fetchCustomer(String customerId) {
@@ -118,54 +263,25 @@ public class DefaultGuitarOrderDao implements GuitarOrderDao {
     return Optional.ofNullable(jdbcTemplate.query(sql, params, new PickResultSetExtractor()));
   }
 
-  @Override
-  public Order saveOrder(Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand,
-      Pick pick, BigDecimal price) {
+  class OrderResultSetExtractor implements ResultSetExtractor<Order> {
+    @Override
+    public Order extractData(ResultSet rs) throws SQLException {
+      rs.next();
 
-    SqlParams params = generateInsertSql(customer, guitar, strap, capo, stand, pick, price);
+      // @formatter:off
+      return Order.builder()
+          .orderPK(rs.getLong("order_pk"))
+          .customer(Customer.class(rs.getLong("customer_fk")))
+          .guitar(rs.getString("guitar"))
+          .strap(rs.getString("strap"))
+          .capo(rs.getString("capo"))
+          .stand(rs.getString("stand"))
+          .pick(rs.getString("pick"))
+          .price(rs.getBigDecimal("price"))
+          .build();
+      // @formatter:on
 
-    KeyHolder keyHolder = new GeneratedKeyHolder();
-    jdbcTemplate.update(params.sql, params.source, keyHolder);
-
-    Long orderPK = keyHolder.getKey().longValue();
-
-    // @formatter:off
-    return Order.builder()
-        .orderPK(orderPK)
-        .customer(customer)
-        .guitar(guitar)
-        .strap(strap)
-        .capo(capo)
-        .stand(stand)
-        .pick(pick)
-        .price(price)
-        .build();
-    // @formatter:on
-  }
-
-  private SqlParams generateInsertSql(Customer customer, Guitar guitar, Strap strap, Capo capo,
-      Stand stand, Pick pick, BigDecimal price) {
-    // @formatter:off
-    String sql = ""
-        + "INSERT INTO orders ("
-        + "customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price"
-        + ") VALUES ("
-        + ":customer_fk, :strap_fk, :capo_fk, :stand_fk, :pick_fk, :guitar_fk, :price"
-        + ")";
-    // @formatter:on
-    
-    SqlParams params = new SqlParams();
-    
-    params.sql = sql;
-    params.source.addValue("customer_fk", customer.getCustomerPK());
-    params.source.addValue("strap_fk", strap.getStrapPK());
-    params.source.addValue("capo_fk", capo.getCapoPK());
-    params.source.addValue("stand_fk", stand.getStandPK());
-    params.source.addValue("pick_fk", pick.getPickPK());
-    params.source.addValue("guitar_fk", guitar.getGuitarPK());
-    params.source.addValue("price", price);
-    
-    return params;
+    }
   }
 
   class CustomerResultSetExtractor implements ResultSetExtractor<Customer> {

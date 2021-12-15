@@ -31,7 +31,7 @@ import com.promineotech.guitar.entity.Order;
     private JdbcTemplate jdbcTemplate;
     
     @Test
-    void testUpdateOrderReturnsSuccess201() {
+    void testUpdateOrderReturnsSuccess200() {
       // Given: an order as JSON
       String body = createOrderBody();
       String uri = getBaseUriForOrders();
@@ -45,16 +45,17 @@ import com.promineotech.guitar.entity.Order;
       
       // When: the order is sent
       ResponseEntity<Order> response = 
-          getRestTemplate().exchange(uri,  HttpMethod.POST, bodyEntity, Order.class);
-   // Then: a 201 status is returned
-      assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+          getRestTemplate().exchange(uri,  HttpMethod.PUT, bodyEntity, Order.class);
+   // Then: a 200 status is returned
+      assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
       
       // And: the returned order is correct
       assertThat(response.getBody()).isNotNull();
       
       Order order = response.getBody();
+      assertThat(order.getOrderPK()).isEqualTo("1");
       assertThat(order.getCustomer().getCustomerId()).isEqualTo("MARTINEZ_JULIE");
-      assertThat(order.getGuitar().getGuitarId()).isEqualTo("HD28_MARTIN");
+      assertThat(order.getGuitar().getGuitarId()).isEqualTo("912CE_TAYLOR");
       assertThat(order.getStrap().getStrapId()).isEqualTo("VINTAGE_BELT_LEATHER_MARTIN");
       assertThat(order.getCapo().getCapoId()).isEqualTo("QUICK_CHANGE_KYSER");
       assertThat(order.getStand().getStandId()).isEqualTo("GFW_GTRA_40000_GATOR");

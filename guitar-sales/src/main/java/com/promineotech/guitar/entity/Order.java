@@ -1,6 +1,7 @@
 package com.promineotech.guitar.entity;
 
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,11 +10,15 @@ import lombok.Data;
 public class Order {
   private Long orderPK;
   private Customer customer;
+  private Guitar guitar;
   private Strap strap;
   private Capo capo;
   private Stand stand;
   private Pick pick;
-  private Guitar guitar;
   private BigDecimal price;
 
+  @JsonIgnore
+  public Long getOrderPK() {
+    return orderPK;
+  }
 }

@@ -6,4 +6,6 @@ import com.promineotech.guitar.entity.OrderRequest;
 public interface GuitarOrderService {
 
   Order createOrder(OrderRequest orderRequest);
+
+  Order updateOrder(OrderRequest orderRequest);
 }

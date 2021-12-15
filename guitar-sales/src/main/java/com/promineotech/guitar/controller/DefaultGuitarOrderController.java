@@ -21,4 +21,10 @@ public class DefaultGuitarOrderController implements GuitarOrderController {
     return guitarOrderService.createOrder(orderRequest);
   }
 
+  @Override
+  public Order updateOrder(OrderRequest orderRequest) {
+    log.debug("Order={}", orderRequest);
+    return guitarOrderService.updateOrder(orderRequest);
+  }
+
 }

@@ -10,6 +10,11 @@ public class OrderRequest {
   @NotNull
   @Length(max = 30)
   @Pattern(regexp = "[\\w\\s]*")
+  private Long order;
+  
+  @NotNull
+  @Length(max = 30)
+  @Pattern(regexp = "[\\w\\s]*")
   private String customer;
   
   @NotNull

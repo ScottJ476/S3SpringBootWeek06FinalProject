@@ -40,6 +40,25 @@ public class DefaultGuitarOrderService implements GuitarOrderService {
     
     return guitarOrderDao.saveOrder(customer, guitar, strap, capo, stand, pick, price);
   }
+  
+  @Transactional
+  @Override
+  public Order updateOrder(OrderRequest orderRequest) {
+    log.debug("Order={}", orderRequest);
+    
+    Order order = getOrder(orderRequest);
+    Customer customer = getCustomer(orderRequest);
+    Guitar guitar = getGuitar(orderRequest);
+    Strap strap = getStrap(orderRequest);
+    Capo capo = getCapo(orderRequest);
+    Stand stand = getStand(orderRequest);
+    Pick pick = getPick(orderRequest);
+    
+    BigDecimal price = 
+        guitar.getPrice().add(strap.getPrice()).add(capo.getPrice()).add(stand.getPrice()).add(pick.getPrice());
+    
+    return guitarOrderDao.updateOrder(order, customer, guitar, strap, capo, stand, pick, price);
+  }
 
   private Pick getPick(OrderRequest orderRequest) {
     return guitarOrderDao.fetchPick(orderRequest.getPick())
@@ -77,4 +96,9 @@ public class DefaultGuitarOrderService implements GuitarOrderService {
             "Customer with ID=" + orderRequest.getCustomer() + " was not found"));
   }
 
+  private Order getOrder(OrderRequest orderRequest) {
+    return guitarOrderDao.fetchOrder(orderRequest.getOrder())
+        .orElseThrow(() -> new NoSuchElementException(
+            "Order with ID=" + orderRequest.getOrder() + " was not found"));
+  }
 }

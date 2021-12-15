@@ -20,4 +20,7 @@ public interface GuitarOrderDao {
 
   Order saveOrder(Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand, Pick pick,
       BigDecimal price);
+  
+  void updateOrder(Order order, Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand,
+      Pick pick, BigDecimal price);
 }
