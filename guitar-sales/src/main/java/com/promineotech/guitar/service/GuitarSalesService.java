@@ -8,17 +8,24 @@ public interface GuitarSalesService {
 
   /**
    * 
-   * @param model
+   * @param guitarId
    * @return
    */
   Optional<Guitar> fetchGuitar(String guitarId);
+  
+//  /**
+//   * 
+//   * @param guitarId
+//   * @return
+//   */
+//  Optional<Guitar> updateGuitar(String guitarId);
+  
   /**
    * 
    * @param image
    * @param guitarPK
    * @return
    */
-
   String uploadImage(MultipartFile image, Long guitarPK);
-
+  
 }

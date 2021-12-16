@@ -1,5 +1,6 @@
 package com.promineotech.guitar.service;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,9 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +53,7 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
       throw new UncheckedIOException(e);
     }
   }
+  
  /**
   * 
   * @param bufferedImage
@@ -90,6 +90,21 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
     
     return guitar;
   }
+  
+//  @Transactional
+//  @Override
+//  public Optional<Guitar> updateGuitar(String guitarId) {
+//    log.info("The updateGuitar method was called with guitarId={}", guitarId);
+//    
+//    Optional<Guitar> guitar = guitarSalesDao.updateGuitar(guitarId);
+//    
+//    if(guitar.isEmpty()) {
+//      String msg = String.format("No guitar found with guitarId=%s", guitarId);
+//      throw new NoSuchElementException(msg);
+//    }
+//    
+//    return guitar;
+//  }
 
 
 

@@ -90,6 +90,7 @@ CREATE TABLE picks (
 
 CREATE TABLE orders (
   order_pk int unsigned NOT NULL AUTO_INCREMENT,
+  order_id varchar(30) NOT NULL,
   customer_fk int unsigned NOT NULL,
   strap_fk int unsigned,
   capo_fk int unsigned,
@@ -98,6 +99,7 @@ CREATE TABLE orders (
   guitar_fk int unsigned NOT NULL,
   price decimal(9, 2) NOT NULL,
   PRIMARY KEY (order_pk),
+  UNIQUE KEY (order_id),
   FOREIGN KEY (customer_fk) REFERENCES customers (customer_pk) ON DELETE CASCADE,
   FOREIGN KEY (strap_fk) REFERENCES straps (strap_pk) ON DELETE CASCADE,
   FOREIGN KEY (capo_fk) REFERENCES capos (capo_pk) ON DELETE CASCADE,

@@ -7,7 +7,7 @@ INSERT INTO customers (customer_id, first_name, last_name, phone) VALUES('KISSEN
 INSERT INTO customers (customer_id, first_name, last_name, phone) VALUES('SANCHEZ_CHRISTINA', 'Christina', 'Sanchez', NULL);
 INSERT INTO customers (customer_id, first_name, last_name, phone) VALUES('SMITH_KIMBERLY', 'Kimberly', 'Smith', '777.989.2876');
 
--- MODELS =======================================================================================================
+-- MODELS =================================================================================
 
 -- Cordoba
 INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('RODRIQUEZ_CORDOBA', 'Cordoba', 'Rodriguez Master Series', 'NYLON', 6, 'Classical', 'Cedar', 'Indian Rosewood', 4399.00);
@@ -32,7 +32,7 @@ INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, b
 INSERT INTO guitars (guitar_id, manufacturer, model, string_type, num_strings, body_shape, top_wood, back_sides_wood, price) VALUES ('C40II_YAMAHA', 'Yamaha', 'C40II Full-scale Classical', 'NYLON', 6, 'Classical', 'Spruce', 'Meranti', 159.99);
 
 
--- ACCESSORIES ===================================================================================================
+-- ACCESSORIES ===================================================================================
 
 -- Straps
 INSERT INTO straps (strap_id, manufacturer, model, material, color, price) VALUES ('2_INCH_POLYPRO_ERNIE_BALL', 'Ernie Ball', '2 Inch Polypro Strap', 'Woven Polypropylene with Leather Ends', 'Black', 6.99);
@@ -49,3 +49,10 @@ INSERT INTO stands (stand_id, manufacturer, model, price) VALUES ('GFW_GTRA_4000
 -- Picks
 INSERT INTO picks (pick_id, manufacturer, model, price) VALUES ('TORTEX_60MM_DUNLOP', 'Dunlop', '418P060 Tortex Standard Guitar Picks - .60mm Orange (12-pack)', 4.49);
 INSERT INTO picks (pick_id, manufacturer, model, price) VALUES ('CELLULOID_MEDIUM_FENDER', 'Fender', '351 Celluloid Guitar Pick Medley - Medium (12-pack)', 5.79);
+
+-- ORDERS ======================================================================================
+INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('JONES_FLORENCE_ORDER_1', 1, 2, 1, 1, 1, 1, 4501.38);
+INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('MARTINEZ_JULIE_ORDER_1', 4, 1, 2, 2, 2, 6, 1509.75);
+INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('BAKER_BRUCE_ORDER_1', 3, 2, 1, 2, 2, 10, 275.62);
+INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('MARTINEZ_JULIE_ORDER_2', 4, 2, 2, 2, 1, 4, 2605.46);
+

@@ -3,18 +3,17 @@ package com.promineotech.guitar.controller;
 import java.util.Optional;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
-import java.util.List;
-import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.promineotech.guitar.Constants;
 import org.springframework.web.multipart.MultipartFile;
+import com.promineotech.guitar.Constants;
 import com.promineotech.guitar.entity.Guitar;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -71,6 +70,14 @@ public interface GuitarSalesController {
           String guitarId);     
 //@formatter:on
   
+//  @PutMapping
+//  @ResponseStatus(code = HttpStatus.OK)
+//  Optional<Guitar> updateGuitar(
+//      @Length(max = Constants.GUITARID_MAX_LENGTH)
+//      @Pattern(regexp = "[\\w\\s]*") 
+//      @RequestParam(required = false)        
+//          String guitarId); 
+  
   /**
    * You should add the OpenAPI doc.
    * @param image
@@ -81,4 +88,6 @@ public interface GuitarSalesController {
   @ResponseStatus(code = HttpStatus.CREATED)
   String uploadImage(@RequestParam("image") MultipartFile image,
       @PathVariable Long guitarPK);
+  
+  
 }

@@ -9,15 +9,24 @@ public interface GuitarSalesDao {
 
   /**
    * 
-   * @param model
+   * @param guitarId
    * @return
    */
   Optional<Guitar> fetchGuitar(String guitarId);
 
+//  /**
+//   * 
+//   * @param guitarId
+//   * @return
+//   */
+//  Optional<Guitar> updateGuitar(String guitarId);
+  
   /**
    * 
    * @param image
    */
   void saveImage(Image image);
+
+  
 
 }

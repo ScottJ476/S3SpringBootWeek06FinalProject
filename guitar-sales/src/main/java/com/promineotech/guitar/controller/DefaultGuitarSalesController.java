@@ -1,6 +1,8 @@
 package com.promineotech.guitar.controller;
 
 import java.util.Optional;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,15 @@ public class DefaultGuitarSalesController implements GuitarSalesController {
     return guitarSalesService.fetchGuitar(guitarId);
   }
 
+//  /**
+//   * 
+//   */
+//  @Override
+//  public Optional<Guitar> updateGuitar(String guitarId) {
+//    log.debug("guitarId={}", guitarId);
+//    return guitarSalesService.updateGuitar(guitarId);
+//  }
+  
   /**
    * 
    */
@@ -32,5 +43,7 @@ log.debug("image={}, guitarPK={}", image, guitarPK);
     
     return json;
   }
+
+ 
 
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 public class Order {
   private Long orderPK;
+  private String orderId;
   private Customer customer;
   private Guitar guitar;
   private Strap strap;

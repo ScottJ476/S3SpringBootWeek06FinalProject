@@ -6,11 +6,11 @@ import org.hibernate.validator.constraints.Length;
 import lombok.Data;
 
 @Data
-public class OrderRequest {
+public class OrderRequest { 
   @NotNull
   @Length(max = 30)
   @Pattern(regexp = "[\\w\\s]*")
-  private Long order;
+  private String orderId;
   
   @NotNull
   @Length(max = 30)

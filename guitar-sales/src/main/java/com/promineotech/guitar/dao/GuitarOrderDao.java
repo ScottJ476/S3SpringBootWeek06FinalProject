@@ -11,7 +11,9 @@ import com.promineotech.guitar.entity.Stand;
 import com.promineotech.guitar.entity.Strap;
 
 public interface GuitarOrderDao {
+  //Optional<Order> fetchOrder(String orderId);
   Optional<Customer> fetchCustomer(String custumerId);
+  //Optional<Customer> fetchCustomer(Long customerPK);
   Optional<Guitar> fetchGuitar(String guitarId);
   Optional<Strap> fetchStrap(String strapId);
   Optional<Capo> fetchCapo(String capoId);
@@ -21,6 +23,6 @@ public interface GuitarOrderDao {
   Order saveOrder(Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand, Pick pick,
       BigDecimal price);
   
-  void updateOrder(Order order, Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand,
+  Order updateOrder(String orderId, Customer customer, Guitar guitar, Strap strap, Capo capo, Stand stand,
       Pick pick, BigDecimal price);
 }

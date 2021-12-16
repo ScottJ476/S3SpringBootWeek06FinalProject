@@ -33,7 +33,7 @@ import com.promineotech.guitar.entity.Order;
     @Test
     void testUpdateOrderReturnsSuccess200() {
       // Given: an order as JSON
-      String body = createOrderBody();
+      String body = updateOrderBody();
       String uri = getBaseUriForOrders();
       
       int numRowsOrders = JdbcTestUtils.countRowsInTable(jdbcTemplate,  "orders");
@@ -52,8 +52,12 @@ import com.promineotech.guitar.entity.Order;
       // And: the returned order is correct
       assertThat(response.getBody()).isNotNull();
       
+      // Updated the order to the following:
+      //    guitarId from "0018_MARTIN" to "912CE_TAYLOR", 
+      //    capoId from "83CB_TRIGGER_DUNLOP" to "QUICK_CHANGE_KYSER", 
+      //    pickId from "TORTEX_60MM_DUNLOP" to "CELLULOID_MEDIUM_FENDER".
       Order order = response.getBody();
-      assertThat(order.getOrderPK()).isEqualTo("1");
+      assertThat(order.getOrderId()).isEqualTo("MARTINEZ_JULIE_ORDER_2");
       assertThat(order.getCustomer().getCustomerId()).isEqualTo("MARTINEZ_JULIE");
       assertThat(order.getGuitar().getGuitarId()).isEqualTo("912CE_TAYLOR");
       assertThat(order.getStrap().getStrapId()).isEqualTo("VINTAGE_BELT_LEATHER_MARTIN");
@@ -61,8 +65,6 @@ import com.promineotech.guitar.entity.Order;
       assertThat(order.getStand().getStandId()).isEqualTo("GFW_GTRA_40000_GATOR");
       assertThat(order.getPick().getPickId()).isEqualTo("CELLULOID_MEDIUM_FENDER");
       
-      assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "orders")).isEqualTo(numRowsOrders + 1);
-
-      
+      assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "orders")).isEqualTo(numRowsOrders);
     }
   }
