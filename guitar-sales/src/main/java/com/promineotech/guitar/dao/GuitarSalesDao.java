@@ -27,6 +27,8 @@ public interface GuitarSalesDao {
    */
   void saveImage(Image image);
 
+  Optional<Image> retrieveImage(String imageId);
+
   
 
 }

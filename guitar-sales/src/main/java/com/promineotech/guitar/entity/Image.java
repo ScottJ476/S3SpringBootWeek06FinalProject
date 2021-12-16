@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class Image {
   private Long imagePK;
-  private Long modelFK;
+  private Long guitarFK;
   private String imageId;
   private int width;
   private int height;

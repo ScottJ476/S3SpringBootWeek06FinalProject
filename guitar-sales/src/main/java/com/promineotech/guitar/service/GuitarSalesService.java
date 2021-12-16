@@ -3,6 +3,7 @@ package com.promineotech.guitar.service;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 import com.promineotech.guitar.entity.Guitar;
+import com.promineotech.guitar.entity.Image;
 
 public interface GuitarSalesService {
 
@@ -27,5 +28,12 @@ public interface GuitarSalesService {
    * @return
    */
   String uploadImage(MultipartFile image, Long guitarPK);
+
+  /**
+   * 
+   * @param imageId
+   * @return
+   */
+  Image retrieveImage(String imageId);
   
 }

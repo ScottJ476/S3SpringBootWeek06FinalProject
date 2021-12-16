@@ -44,7 +44,7 @@ class ImageUploadTest {
   private JdbcTemplate jdbcTemplate;
 
   @Test
-  void testThatTheServerCorrectlyReveivesAnImageAndReturnsAnOKResponse() throws Exception {
+  void testThatTheServerCorrectlyRetrievesAnImageAndReturnsAnOKResponse() throws Exception {
     String json = assertImageUpload();
     String imageId = extractImageId(json);
     
@@ -82,13 +82,13 @@ class ImageUploadTest {
           .perform(MockMvcRequestBuilders
               .multipart("/guitars/3/image")
               .file(file))
-          .andDo(print())
           .andExpect(status().is(201))
           .andReturn();
       // @formatter:on
       
       String content = result.getResponse().getContentAsString();
       assertThat(content).isNotEmpty();
+      
       assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images"))
       .isEqualTo(numRows + 1);
       
