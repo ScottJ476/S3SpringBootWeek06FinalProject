@@ -30,10 +30,9 @@ class FetchGuitarTest {
   @Nested
   @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
   @ActiveProfiles("test")
-  @Sql(
-      scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
-          "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
-      config = @SqlConfig(encoding = "utf-8"))
+  @Sql(scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
+                  "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
+                  config = @SqlConfig(encoding = "utf-8"))
   class TestsThatDoNotPolluteTheApplicationContext extends FetchGuitarTestSupport {
 
     @Test
@@ -110,10 +109,9 @@ class FetchGuitarTest {
   @Nested
   @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
   @ActiveProfiles("test")
-  @Sql(
-      scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
-          "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
-      config = @SqlConfig(encoding = "utf-8"))
+  @Sql(scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
+                  "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
+                  config = @SqlConfig(encoding = "utf-8"))
   class TestsThatPolluteTheApplicationContext extends FetchGuitarTestSupport {
     @MockBean
     private GuitarSalesService guitarSalesService;
@@ -127,6 +125,7 @@ class FetchGuitarTest {
 
       doThrow(new RuntimeException("Something went wrong!")).when(guitarSalesService)
           .fetchGuitar(guitarId);
+      
       // When: a connection is made to the URI
       ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(uri, HttpMethod.GET,
           null, new ParameterizedTypeReference<>() {});
@@ -140,6 +139,5 @@ class FetchGuitarTest {
       assertErrorMessageValid(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
 }
 

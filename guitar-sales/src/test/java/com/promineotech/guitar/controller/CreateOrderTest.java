@@ -21,10 +21,9 @@ import com.promineotech.guitar.entity.Order;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-@Sql(scripts = {
-        "classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
-        "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
-    config = @SqlConfig(encoding = "utf-8"))
+@Sql(scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
+                "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
+                 config = @SqlConfig(encoding = "utf-8"))
 class CreateOrderTest extends CreateOrderTestSupport {
 
   @Autowired
@@ -54,6 +53,7 @@ class CreateOrderTest extends CreateOrderTestSupport {
     assertThat(response.getBody()).isNotNull();
     
     Order order = response.getBody();
+    assertThat(order.getOrderId()).isEqualTo("MARTINEZ_JULIE_ORDER_3");
     assertThat(order.getCustomer().getCustomerId()).isEqualTo("MARTINEZ_JULIE");
     assertThat(order.getGuitar().getGuitarId()).isEqualTo("HD28_MARTIN");
     assertThat(order.getStrap().getStrapId()).isEqualTo("VINTAGE_BELT_LEATHER_MARTIN");

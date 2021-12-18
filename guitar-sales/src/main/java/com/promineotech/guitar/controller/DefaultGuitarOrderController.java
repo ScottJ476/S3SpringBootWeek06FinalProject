@@ -1,6 +1,5 @@
 package com.promineotech.guitar.controller;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.promineotech.guitar.entity.Order;
@@ -16,7 +15,13 @@ public class DefaultGuitarOrderController implements GuitarOrderController {
   private GuitarOrderService guitarOrderService;
   
   @Override
-  public Order createOrder( OrderRequest orderRequest) {
+  public Order fetchOrder(String orderId) {
+    log.debug("Order={}", orderId);
+    return guitarOrderService.fetchOrder(orderId);
+  }
+  
+  @Override
+  public Order createOrder(OrderRequest orderRequest) {
     log.debug("Order={}", orderRequest);
     return guitarOrderService.createOrder(orderRequest);
   }
@@ -26,5 +31,10 @@ public class DefaultGuitarOrderController implements GuitarOrderController {
     log.debug("Order={}", orderRequest);
     return guitarOrderService.updateOrder(orderRequest);
   }
-
+  
+  @Override
+  public void deleteOrder(String orderId) {
+    log.debug("orderId={}", orderId);
+    guitarOrderService.deleteOrder(orderId);
+  }
 }

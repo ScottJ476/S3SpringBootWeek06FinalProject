@@ -46,6 +46,7 @@ import com.promineotech.guitar.entity.Order;
       // When: the order is sent
       ResponseEntity<Order> response = 
           getRestTemplate().exchange(uri,  HttpMethod.PUT, bodyEntity, Order.class);
+      
    // Then: a 200 status is returned
       assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
       

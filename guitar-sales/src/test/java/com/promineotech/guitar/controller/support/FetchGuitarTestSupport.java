@@ -2,8 +2,6 @@ package com.promineotech.guitar.controller.support;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import com.promineotech.guitar.entity.Guitar;

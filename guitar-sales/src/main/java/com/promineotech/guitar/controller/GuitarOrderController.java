@@ -1,13 +1,19 @@
 package com.promineotech.guitar.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import com.promineotech.guitar.Constants;
 import com.promineotech.guitar.entity.Order;
 import com.promineotech.guitar.entity.OrderRequest;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -53,14 +59,31 @@ public interface GuitarOrderController {
            name = "orderRequest", 
            required = true, 
            description = "The order as JSON")
-   } 
+   }
  )
+ 
+ @GetMapping
+ @ResponseStatus(code = HttpStatus.OK)
+ Order fetchOrder(
+     @Length(max = Constants.ORDERID_MAX_LENGTH)
+     @Pattern(regexp = "[\\w\\s]*") 
+     @RequestParam(required = false)        
+         String orderId);
+ 
  @PostMapping
  @ResponseStatus(code = HttpStatus.CREATED)
  Order createOrder(@Valid @RequestBody OrderRequest orderRequest);
-     
+ 
  @PutMapping
  @ResponseStatus(code = HttpStatus.OK)
  Order updateOrder(@Valid @RequestBody OrderRequest orderRequest);
+ 
+ @DeleteMapping
+ @ResponseStatus(code = HttpStatus.OK)
+ void deleteOrder(
+     @Length(max = Constants.ORDERID_MAX_LENGTH)
+     @Pattern(regexp = "[\\w\\s]*") 
+     @RequestParam(required = false)        
+         String orderId);
 //@formatter: on
 }

@@ -14,5 +14,4 @@ public class Image {
   private ImageMimeType mimeType;
   private String name;
   private byte[] data;
-
 }

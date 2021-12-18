@@ -1,6 +1,5 @@
 package com.promineotech.guitar.controller;
 
-import java.util.Optional;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -64,30 +62,22 @@ public interface GuitarSalesController {
   )
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
-  Optional<Guitar> fetchGuitar(
+  Guitar fetchGuitar(
       @Length(max = Constants.GUITARID_MAX_LENGTH)
       @Pattern(regexp = "[\\w\\s]*") 
       @RequestParam(required = false)        
           String guitarId);     
 //@formatter:on
   
-//  @PutMapping
-//  @ResponseStatus(code = HttpStatus.OK)
-//  Optional<Guitar> updateGuitar(
-//      @Length(max = Constants.GUITARID_MAX_LENGTH)
-//      @Pattern(regexp = "[\\w\\s]*") 
-//      @RequestParam(required = false)        
-//          String guitarId); 
-  
   /**
-   * You should add the OpenAPI doc.
    * @param image
    * @param guitarPK
    * @return
    */
   @PostMapping("/{guitarPK}/image")
   @ResponseStatus(code = HttpStatus.CREATED)
-  String uploadImage(@RequestParam("image") MultipartFile image,
+  String uploadImage(
+      @RequestParam("image") MultipartFile image,
       @PathVariable Long guitarPK);
   
   @GetMapping("/image/{imageId}")

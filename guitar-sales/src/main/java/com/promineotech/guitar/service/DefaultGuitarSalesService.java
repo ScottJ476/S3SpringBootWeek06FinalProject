@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 import javax.imageio.ImageIO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,24 +34,26 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
             "Could not find image with ID=" + imageId));
   }
 
-
   @Transactional
   @Override
-  public String uploadImage(MultipartFile file, Long modelPK) {
+  public String uploadImage(MultipartFile file, Long guitarPK) {
+   
     String imageId = UUID.randomUUID().toString();
 
+    log.debug("Uploading image with ID={}", imageId);
+    
     try (InputStream inputStream = file.getInputStream()) {
       BufferedImage bufferedImage = ImageIO.read(inputStream);
-
+      
       // @formatter:off
       Image image = Image.builder()
-          .guitarFK(modelPK)
+          .guitarFK(guitarPK)
           .imageId(imageId)
           .width(bufferedImage.getWidth())
           .height(bufferedImage.getHeight())
           .mimeType(ImageMimeType.IMAGE_JPEG)
           .name(file.getOriginalFilename())
-          .data(toByteArray(bufferedImage, "jpeg" ))
+          .data(toByteArray(bufferedImage, "jpeg"))
           .build();
       // @formatter:on
 
@@ -72,6 +73,7 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
    */
   private byte[] toByteArray(BufferedImage bufferedImage, String renderType) {
 
+    log.debug("renderType = " + renderType);
 
     try {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -88,35 +90,10 @@ public class DefaultGuitarSalesService implements GuitarSalesService {
 
   @Transactional(readOnly = true)
   @Override
-  public Optional<Guitar> fetchGuitar(String guitarId) {
+  public Guitar fetchGuitar(String guitarId) {
     log.info("The fetchGuitar method was called with guitarId={}", guitarId);
 
-    Optional<Guitar> guitar = guitarSalesDao.fetchGuitar(guitarId);
-
-    if (guitar.isEmpty()) {
-      String msg = String.format("No guitar found with guitarId=%s", guitarId);
-      throw new NoSuchElementException(msg);
-    }
-
-    return guitar;
+    return guitarSalesDao.fetchGuitar(guitarId).orElseThrow(() -> new NoSuchElementException(
+        "Guitar with ID=" + guitarId + " was not found"));
   }
-
-
-  // @Transactional
-  // @Override
-  // public Optional<Guitar> updateGuitar(String guitarId) {
-  // log.info("The updateGuitar method was called with guitarId={}", guitarId);
-  //
-  // Optional<Guitar> guitar = guitarSalesDao.updateGuitar(guitarId);
-  //
-  // if(guitar.isEmpty()) {
-  // String msg = String.format("No guitar found with guitarId=%s", guitarId);
-  // throw new NoSuchElementException(msg);
-  // }
-  //
-  // return guitar;
-  // }
-
-
-
 }

@@ -55,4 +55,3 @@ INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk,
 INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('MARTINEZ_JULIE_ORDER_1', 4, 1, 2, 2, 2, 6, 1509.75);
 INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('BAKER_BRUCE_ORDER_1', 3, 2, 1, 2, 2, 10, 275.62);
 INSERT INTO orders (order_id, customer_fk, strap_fk, capo_fk, stand_fk, pick_fk, guitar_fk, price) VALUES ('MARTINEZ_JULIE_ORDER_2', 4, 2, 2, 2, 1, 4, 2605.46);
-

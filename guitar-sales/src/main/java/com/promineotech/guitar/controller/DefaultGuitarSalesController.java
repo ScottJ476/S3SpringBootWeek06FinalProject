@@ -1,8 +1,5 @@
 package com.promineotech.guitar.controller;
 
-import java.util.Optional;
-import javax.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +18,7 @@ public class DefaultGuitarSalesController implements GuitarSalesController {
   private GuitarSalesService guitarSalesService;
 
   @Override
-  public Optional<Guitar> fetchGuitar(String guitarId) {
+  public Guitar fetchGuitar(String guitarId) {
     log.debug("guitarId={}", guitarId);
     return guitarSalesService.fetchGuitar(guitarId);
   }
@@ -37,30 +34,16 @@ public class DefaultGuitarSalesController implements GuitarSalesController {
       
     return ResponseEntity.ok().headers(headers).body(image.getData());
   }
-
-//  /**
-//   * 
-//   */
-//  @Override
-//  public Optional<Guitar> updateGuitar(String guitarId) {
-//    log.debug("guitarId={}", guitarId);
-//    return guitarSalesService.updateGuitar(guitarId);
-//  }
   
   /**
    * 
    */
   @Override
   public String uploadImage(MultipartFile image, Long guitarPK) {
-log.debug("image={}, guitarPK={}", image, guitarPK);
+    log.debug("image={}, guitarPK={}", image, guitarPK);
     String imageId = guitarSalesService.uploadImage(image, guitarPK);
     String json = "{\"imageId\":\"" + imageId + "\"}";
     
     return json;
   }
-
-  
-
- 
-
 }

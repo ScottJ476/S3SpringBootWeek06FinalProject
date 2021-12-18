@@ -3,7 +3,6 @@ package com.promineotech.guitar.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.io.IOException;
@@ -29,10 +28,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Sql(
-    scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
-        "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
-    config = @SqlConfig(encoding = "utf-8"))
+@Sql(scripts = {"classpath:flyway/migrations/V1.0__Guitar_Schema.sql",
+                "classpath:flyway/migrations/V1.1__Guitar_Data.sql"},
+                config = @SqlConfig(encoding = "utf-8"))
 class ImageUploadTest {
   
   private static final String GUITAR_IMAGE = "Martin-HD-28-Ambertone-16.jpg";
@@ -89,8 +87,7 @@ class ImageUploadTest {
       String content = result.getResponse().getContentAsString();
       assertThat(content).isNotEmpty();
       
-      assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images"))
-      .isEqualTo(numRows + 1);
+      assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images")).isEqualTo(numRows + 1);
       
       return content;
     }

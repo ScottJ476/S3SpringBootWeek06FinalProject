@@ -13,8 +13,6 @@ public class UpdateOrderTestSupport extends BaseTest{
          + "   \"stand\":\"GFW_GTRA_40000_GATOR\",\n"
          + "   \"pick\":\"CELLULOID_MEDIUM_FENDER\"\n"
          + "}";
-  
     // @formatter:on
   }
-
 }
